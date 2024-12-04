@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+          apiKey: 'key',
+          appId: 'id',
+          messagingSenderId: 'sendid',
+          projectId: 'myapp',
+          )
+    );
+    print('Firebase berhasil diinisialisasi');
+  } catch (e) {
+    print('Gagal menginisialisasi Firebase: $e');
+  }
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
