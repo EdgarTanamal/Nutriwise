@@ -5,12 +5,22 @@ part of 'shared.dart';
 class AppColors{
   static const Color lightgreen = Color(0xFF53D28F); // light Green
   static const Color green = Color(0xFF2ED12E); // dark Green
-  static const Color grey = Color(0xFFF2F5FC); // Blue
+  static const Color grey = Color(0xFFCFCFCF);
   static const Color lightyellow = Color(0xFFFDCF0F); //light yellow
   static const Color yellow = Color(0xFFFFAD31); //yellow
+  static const Color lightred = Color(0xFFC78889);
+  static const Color red = Color(0xFFD12E31);
+  static const Color lightBlue = Color(0xFF5C6CD9);
+  static const Color blue = Color(0xFF4166F5);
+  static const Color lightPurple = Color(0xFFB575E7);
+  static const Color purple = Color(0xFFE341F5);
+
+  static const Color breakfastBG = Color(0xFFA8FFA8);
+  static const Color lunchBG = Color(0xFFFF888A);
+  static const Color dinnerBG = Color(0xFFAAC4FF);
+  static const Color snackBG = Color(0xFFD4A9F5);
 
 
-  static const Color accentColor = Color(0xFFFF5722); // Orange
   static const Color backgroundColor = Color(0xFFF5F5F5); // Light grey
 
 
@@ -36,6 +46,30 @@ class AppGradients {
       AppColors.yellow, // Another color to blend with
     ],
   );
+  static const LinearGradient redGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.lightred, // Your green color
+      AppColors.red, // Another color to blend with
+    ],
+  );
+  static const LinearGradient blueGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.lightBlue, // Your green color
+      AppColors.blue, // Another color to blend with
+    ],
+  );
+  static const LinearGradient purpleGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.lightPurple, // Your green color
+      AppColors.purple, // Another color to blend with
+    ],
+  );
 
   // Define a radial gradient with the green color
   // static const RadialGradient greenRadialGradient = RadialGradient(
@@ -48,7 +82,15 @@ class AppGradients {
   // );
 }
 
-
+class AppPicture{
+  static const String caloriePicture = "assets/images/fire.png";
+  static const String consumePicture = "assets/images/restaurant.png";
+  static const String mealPicture = "assets/images/meal.png";
+  static const String sunrisePicture = "assets/images/sunrise.png";
+  static const String moonPicture = "assets/images/moon.png";
+  static const String afternoonPicture = "assets/images/weather.png";
+  static const String snackPicture = "assets/images/apple.png";
+}
 
 
 class Const {

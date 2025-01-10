@@ -3,49 +3,85 @@ part of'widgets.dart';
 class CalorieProgressIndicator extends StatelessWidget {
   final double calorieConsumed;
   final double calorieGoal;
-  final Gradient greengradient;
+  final Gradient gradient;
   final Gradient yellowGradient;
   final double strokeWidth;
   final double sized;
+  final bool totalCalorie;
+  final String picture;
+  final String name;
+  final Color color;
+  final bool isSelected;
 
   const CalorieProgressIndicator({
     Key? key,
     required this.calorieConsumed,
     required this.calorieGoal,
-    this.greengradient = AppGradients.greenGradient,
+    required this.strokeWidth,
+    required this.sized,
+    required this.name,
+    required this.gradient,
     this.yellowGradient = AppGradients.yellowGradient,
-    this.strokeWidth = 10.0,
-    this.sized = 150,
+    this.totalCalorie = true,
+    this.picture = "",
+    this.color = Colors.greenAccent,
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     double progress = calorieConsumed / calorieGoal;
+    double leftCalorie = calorieGoal-calorieConsumed;
     return Stack(
       alignment: Alignment.center,
       children: [
         Container(
-          width: sized,
-          height: sized,
+          width: sized + (isSelected ? 10 : 0),
+          height:  sized + (isSelected ? 10 : 0),
+          decoration: BoxDecoration(
+            color: totalCalorie ? null : color,
+            borderRadius: BorderRadius.circular(50),
+            border: isSelected
+                ? Border.all(color: Colors.blue, width: 6) // Border biru jika aktif
+                : null,
+          ),
           child: CustomPaint(
-            painter: ProgressPainter(progress, strokeWidth),
+            painter: ProgressPainter(progress, strokeWidth, yellowGradient, gradient, totalCalorie),
           ),
         ),
+
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "$calorieConsumed", // Persentase
-              style: GoogleFonts.archivo(fontSize: 36, color: calorieConsumed>calorieGoal? AppColors.yellow: AppColors.green, fontWeight: FontWeight.bold)
+            totalCalorie?
+            SizedBox.shrink() :
+            Image.asset(
+               picture,
+               height: 20,
+              width: 20,
+              fit: BoxFit.fill,
+
             ),
             Text(
-              "Kcal available",
-              style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText),
+              "$leftCalorie", // Persentase
+              style: GoogleFonts.archivo(
+                  fontSize: totalCalorie?36:10,
+                  color: calorieConsumed>calorieGoal?
+                  AppColors.yellow: AppColors.green,
+                  fontWeight: FontWeight.bold
+              )
+            ),
+            Text(
+              totalCalorie?"Kcal available":"Kcal",
+              style: GoogleFonts.archivo(
+                  fontSize: 10,
+                  color: totalCalorie? AppColors.subText:AppColors.textColor
+              ),
             ),
           ],
-        ),
+        )
       ],
     );
   }
@@ -54,8 +90,18 @@ class CalorieProgressIndicator extends StatelessWidget {
 class ProgressPainter extends CustomPainter {
   final double progress;
   final double strokeWidth;
+  final Gradient greengradient;
+  final Gradient yellowGradient;
+  final bool totalCalorie;
 
-  ProgressPainter(this.progress, this.strokeWidth);
+
+  ProgressPainter(
+      this.progress,
+      this.strokeWidth,
+      this.yellowGradient,
+      this.greengradient,
+      this.totalCalorie,
+      );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -72,11 +118,10 @@ class ProgressPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     // Apply a RadialGradient to the green progress
-    progressPaintGreen.shader = LinearGradient(
-      colors: [AppColors.lightgreen, AppColors.green], // Green gradient
-      begin: Alignment.center, // Gradient starts from the center
-      end: Alignment.centerRight, // Gradient ends at the right edge
-    ).createShader(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2));
+    progressPaintGreen.shader = greengradient.createShader(
+        Rect.fromCircle(
+            center: Offset(size.width / 2, size.height / 2),
+            radius: size.width / 2));
 
     // Paint for the yellow progress circle (above 100%) with gradient
     Paint progressPaintYellow = Paint()
@@ -85,11 +130,10 @@ class ProgressPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     // Apply a RadialGradient to the yellow progress
-    progressPaintYellow.shader = LinearGradient(
-      colors: [AppColors.lightyellow, AppColors.yellow], // Yellow gradient
-      begin: Alignment.centerLeft, // Gradient starts from the center
-      end: Alignment.centerRight, // Gradient ends at the right edge
-    ).createShader(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2));
+    progressPaintYellow.shader = yellowGradient.createShader(
+        Rect.fromCircle(
+            center: Offset(size.width / 2, size.height / 2),
+            radius: size.width / 2));
 
     // Draw the background circle
     canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width / 2, backgroundPaint);
@@ -122,7 +166,7 @@ class ProgressPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false; // No need to repaint unless progress changes
+  bool shouldRepaint(covariant ProgressPainter oldDelegate) {
+    return oldDelegate.progress != progress;
   }
 }

@@ -6,13 +6,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String selectedMeal = "breakfast";
   @override
   Widget build(BuildContext context) {
-    double calorieConsumed = 2400;
-    double calorieGoal=2000;
+    //calorie consumption
+    double breakfastCalorie = 600;
+    double lunchCalorie = 300;
+    double dinnerCalorie = 300;
+    double snackCalorie = 450;
+    //calorie goal
+    double breakfastGoal = 500;
+    double lunchGoal = 500;
+    double dinnerGoal = 500;
+    double snackGoal = 500;
+
+
+    //algorithm to calculate total calorie consumption and goal
+    double totalcalorieConsumed = breakfastCalorie+lunchCalorie+dinnerCalorie+snackCalorie;
+    double calorieGoal=breakfastGoal+lunchGoal+dinnerGoal+snackGoal;
+
     double screenHeight = MediaQuery.of(context).size.height;
-
-
     return Scaffold(
       body: Column(
         children: [
@@ -30,8 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       // Larger circle
                       CalorieProgressIndicator(
-                        calorieConsumed: calorieConsumed,
+                        gradient: AppGradients.greenGradient,
+                        calorieConsumed: totalcalorieConsumed,
                         calorieGoal: calorieGoal,
+                        strokeWidth: 20,
+                        sized:150,
+                        name: "Kcal available",
                       ),
                     ],
                   ),
@@ -44,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
-                            "assets/images/restaurant.png",
+                            AppPicture.consumePicture,
                             width: 30,  // Increased size for better visibility
                             height: 30,
                             fit: BoxFit.cover,
@@ -52,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Column(
                             children: [
                               Text(
-                                  "$calorieConsumed",
+                                  "$totalcalorieConsumed",
                                   style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
                               ),
                               Text(
@@ -69,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
-                            "assets/images/fire.png",
+                            AppPicture.caloriePicture,
                             width: 40,  // Increased size for better visibility
                             height: 40,
                             fit: BoxFit.cover,
@@ -109,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                        "assets/images/meal.png",
+                      AppPicture.mealPicture,
                       height: 36,
                       width: 36,
                     ),
@@ -118,6 +135,124 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+          ),
+          SizedBox(height: 32),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 70),
+            child: Container(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Daily Meals",
+                        style: GoogleFonts.archivo(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textColor),
+                      ),
+                      Text(
+                          "see all",
+                        style: GoogleFonts.archivo(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.subText),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedMeal = "breakfast";
+                            });
+                          },
+                          child: CalorieProgressIndicator(
+                            calorieConsumed: breakfastCalorie,
+                            calorieGoal: breakfastGoal,
+                            strokeWidth: 7,
+                            sized: 65,
+                            name: "Kcal",
+                            totalCalorie: false,
+                            gradient: AppGradients.greenGradient,
+                            isSelected: selectedMeal == "breakfast",
+                            picture: AppPicture.sunrisePicture,
+                            color: AppColors.breakfastBG,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedMeal = "lunch";
+                            });
+                          },
+                          child: CalorieProgressIndicator(
+                            gradient: AppGradients.redGradient,
+                            calorieConsumed: lunchCalorie,
+                            calorieGoal: lunchGoal,
+                            strokeWidth: 7,
+                            sized:65,
+                            name: "Kcal",
+                            picture: AppPicture.afternoonPicture,
+                            totalCalorie: false,
+                            color: AppColors.lunchBG,
+                            isSelected: selectedMeal =="lunch",
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedMeal = "dinner";
+                            });
+                          },
+                          child: CalorieProgressIndicator(
+                            totalCalorie: false,
+                            gradient: AppGradients.blueGradient,
+                            calorieConsumed: dinnerCalorie,
+                            calorieGoal: dinnerGoal,
+                            strokeWidth: 7,
+                            sized:65,
+                            name: "Kcal",
+                            picture: AppPicture.moonPicture,
+                            color: AppColors.dinnerBG,
+                            isSelected: selectedMeal == "dinner",
+                        
+                        
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedMeal = "snack";
+                            });
+                          },
+                          child: CalorieProgressIndicator(
+                            gradient: AppGradients.purpleGradient,
+                            calorieConsumed: snackCalorie,
+                            calorieGoal: snackGoal,
+                            strokeWidth: 7,
+                            sized:65,
+                            name: "Kcal",
+                            picture: AppPicture.snackPicture,
+                            totalCalorie: false,
+                            color: AppColors.snackBG,
+                            isSelected: selectedMeal == "snack",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ) ,
+
+            )
+
           )
         ],
       ),
