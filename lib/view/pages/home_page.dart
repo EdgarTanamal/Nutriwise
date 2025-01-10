@@ -1,135 +1,125 @@
 part of 'pages.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    double calorieConsumed = 2400;
+    double calorieGoal=2000;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Sign in to your account',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Start Your Healthy Life With Us!',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 32),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email Address',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                suffixIcon: Icon(Icons.visibility_off),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-                Text('Remember for 30 days'),
-              ],
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: Text(
-                'Sign in',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Don't have a account? "),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Sign up',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
+      body: Column(
+        children: [
+          Container(
+            height: screenHeight*0.4,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Larger circle
+                      CalorieProgressIndicator(
+                        calorieConsumed: calorieConsumed,
+                        calorieGoal: calorieGoal,
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            GestureDetector(
-              onTap: () {},
-              child: Text(
-                'Forgot password',
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 14,
-                  decoration: TextDecoration.underline,
-                ),
-                textAlign: TextAlign.center,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/restaurant.png",
+                            width: 30,  // Increased size for better visibility
+                            height: 30,
+                            fit: BoxFit.cover,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                  "$calorieConsumed",
+                                  style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
+                              ),
+                              Text(
+                                  "eaten",
+                                  style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/fire.png",
+                            width: 40,  // Increased size for better visibility
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                  "$calorieGoal",
+                                  style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
+                              ),
+                              Text(
+                                  "Kcal Goal",
+                                  style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 32),
-            Row(
-              children: [
-                Expanded(child: Divider()),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text('OR'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.lightgreen,
+                borderRadius: BorderRadius.circular(15), // Set your border radius here
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                        "assets/images/meal.png",
+                      height: 36,
+                      width: 36,
+                    ),
+                    Text("Scan Your Food Here!", style: GoogleFonts.archivo(fontSize: 15, fontWeight: FontWeight.bold),)
+                  ],
                 ),
-                Expanded(child: Divider()),
-              ],
-            ),
-            SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.g_translate),
-              label: Text('Continue with Google'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                side: BorderSide(color: Colors.grey),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 16),
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
