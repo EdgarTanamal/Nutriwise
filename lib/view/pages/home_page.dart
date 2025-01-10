@@ -66,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 30,
                             fit: BoxFit.cover,
                           ),
+                          SizedBox(width: 10),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                   "$totalcalorieConsumed",
@@ -91,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 40,
                             fit: BoxFit.cover,
                           ),
+                          SizedBox(width: 2),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                   "$calorieGoal",
@@ -122,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
@@ -130,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 36,
                       width: 36,
                     ),
+                    SizedBox(width: 32),
                     Text("Scan Your Food Here!", style: GoogleFonts.archivo(fontSize: 15, fontWeight: FontWeight.bold),)
                   ],
                 ),
