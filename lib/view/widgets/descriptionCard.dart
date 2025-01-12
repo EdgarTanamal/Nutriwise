@@ -33,8 +33,10 @@ class descriptionCard extends StatelessWidget {
                 color: AppColors.subText,
               ),
             ),
+
           ],
-        )
+        ),
+        SizedBox(height: 14),
       ],
     );
   }

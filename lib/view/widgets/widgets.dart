@@ -7,5 +7,6 @@ import 'package:google_fonts/google_fonts.dart'; // Correct relative path to con
 
 
 part 'calorieProgressIndicator.dart';
-part 'cardWidget.dart';
+part 'dailyMealsCard.dart';
 part 'descriptionCard.dart';
+part 'widgetCard.dart';

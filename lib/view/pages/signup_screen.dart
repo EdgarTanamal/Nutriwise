@@ -2,7 +2,6 @@
 // import 'package:diabets/data/network/firebaseAuthServices.dart';
 // import 'package:diabets/repository/user/userRepository.dart'; // Import UserRepository
 // import 'package:diabets/model/user.dart'; // Import UserModel
-// import 'home_screen.dart'; // Main screen after login
 // import 'login_screen.dart'; // Link to login page
 //
 // class SignUpScreen extends StatefulWidget {

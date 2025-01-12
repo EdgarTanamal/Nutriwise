@@ -166,6 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 70),
               child: Container(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,11 +276,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(height: 32),
-                    CardWidget(
+                    dailyMealsCard(
                         calorieConsumed: calorieConsumed,
                         calorieGoal: calorieGoal,
                         isSelected:selectedMeal
                     ),
+                    SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Recommended Meals",
+                          style: GoogleFonts.archivo(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textColor),
+                        ),
+                        Text(
+                          "see all",
+                          style: GoogleFonts.archivo(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.subText),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ArticleCard(picture: "picture", isArticle: false,food: "FOOD",calorie: 300,),
+                          ArticleCard(picture: "picture", isArticle: false,food: "FOOD",calorie: 300,),
+                          ArticleCard(picture: "picture", isArticle: false,food: "FOOD",calorie: 300,)
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Newest Article",
+                          style: GoogleFonts.archivo(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textColor),
+                        ),
+                        Text(
+                          "see all",
+                          style: GoogleFonts.archivo(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.subText),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ArticleCard(picture: "picture", keywords: "keywords", title: "title", description: "description",isArticle: true),
+                          ArticleCard(picture: "picture", keywords: "keywords", title: "title", description: "description",isArticle: true),
+                          ArticleCard(picture: "picture", keywords: "keywords", title: "title", description: "description",isArticle: true),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 32),
+
                   ],
                 ) ,
         

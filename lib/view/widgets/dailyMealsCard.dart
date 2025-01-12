@@ -1,24 +1,16 @@
 part of 'widgets.dart';
 
-class CardWidget extends StatelessWidget {
-  final String articlePicture;
-  final String recMealsPicture;
-  final String keywords;
+class dailyMealsCard extends StatelessWidget {
   final String isSelected;
   final double calorieConsumed;
   final double calorieGoal;
-  final String description;
 
 
-  const CardWidget({
+  const dailyMealsCard({
     super.key,
     required this.calorieConsumed,
     required this.calorieGoal,
     required this.isSelected,
-    this.articlePicture="e",
-    this.recMealsPicture="e",
-    this.keywords="e",
-    this.description="e",
 
   });
 
@@ -66,7 +58,7 @@ class CardWidget extends StatelessWidget {
     }
 
     return Stack(
-      alignment: Alignment.center,
+      alignment: Alignment.centerRight,
       children: [
         IntrinsicHeight(
           child: Row(
@@ -142,16 +134,42 @@ class CardWidget extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 20),
-                        Column(
-                          children: descriptionCards.map((desc) {
-                            return descriptionCard(
-                              food: desc["food"] ?? "",
-                              amount: desc["amount"] ?? "",
-                              calorie: desc["calorie"] ?? "",
-                            );
-                          }).toList(),
-                        ),
-
+                        descriptionCards.isEmpty
+                            ?Container(
+                                height: 70,
+                                child: Center(
+                                  child: Text(
+                                    "There is no history yet",
+                                    style: GoogleFonts.archivo(
+                                      fontSize: 14,
+                                      color: AppColors.subText,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            :Column(
+                                children: descriptionCards.map((desc) {
+                                  return descriptionCard(
+                                    food: desc["food"] ?? "",
+                                    amount: desc["amount"] ?? "",
+                                    calorie: desc["calorie"] ?? "",
+                                  );
+                                }).toList(),
+                              ),
+                        SizedBox(height: 19),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              "See Details...",
+                              textAlign: TextAlign.right,
+                              style: GoogleFonts.archivo(
+                                fontSize: 10,
+                                color: AppColors.textColor
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
