@@ -22,10 +22,11 @@ class AppColors{
 
 
   static const Color backgroundColor = Color(0xFFF5F5F5); // Light grey
-
+  static const Color backgroundCard = Color(0xFFFFFFFF);
 
   static const Color textColor = Color(0xFF333333); // Dark grey
   static const Color subText = Color(0xFF9DA8C3); // light blue
+  static const Color button = Color(0xFF91C788);
 }
 
 class AppGradients {
@@ -90,6 +91,7 @@ class AppPicture{
   static const String moonPicture = "assets/images/moon.png";
   static const String afternoonPicture = "assets/images/weather.png";
   static const String snackPicture = "assets/images/apple.png";
+  static const String plusPicture = "assets/images/plus.png";
 }
 
 
