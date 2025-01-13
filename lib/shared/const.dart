@@ -92,6 +92,10 @@ class AppPicture{
   static const String afternoonPicture = "assets/images/weather.png";
   static const String snackPicture = "assets/images/apple.png";
   static const String plusPicture = "assets/images/plus.png";
+  static const String calendar = "assets/images/calendar.png";
+  static const String notification = "assets/images/bell.png";
+  static const String activenotification = "assets/images/active.png";
+
 }
 
 

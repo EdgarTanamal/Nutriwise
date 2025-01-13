@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: const Header(),
       body: SingleChildScrollView(
         child: Column(
           children: [

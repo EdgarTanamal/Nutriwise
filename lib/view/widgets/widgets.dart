@@ -10,3 +10,5 @@ part 'calorieProgressIndicator.dart';
 part 'dailyMealsCard.dart';
 part 'descriptionCard.dart';
 part 'widgetCard.dart';
+part 'header.dart';
+part 'navbar.dart';
