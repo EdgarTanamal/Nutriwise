@@ -13,7 +13,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false, // Remove default back button
       flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 20), // Adjust padding as needed
+        padding: const EdgeInsets.only(top: 60), // Adjust padding as needed
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly space items
           crossAxisAlignment: CrossAxisAlignment.center,

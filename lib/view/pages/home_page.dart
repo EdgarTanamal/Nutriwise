@@ -10,19 +10,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     //calorie consumption
-    double breakfastCalorie = 600;
-    double lunchCalorie = 300;
-    double dinnerCalorie = 300;
-    double snackCalorie = 450;
+    int breakfastCalorie = 600;
+    int lunchCalorie = 300;
+    int dinnerCalorie = 500;
+    int snackCalorie = 400;
     //calorie goal
-    double breakfastGoal = 500;
-    double lunchGoal = 500;
-    double dinnerGoal = 500;
-    double snackGoal = 500;
+    int breakfastGoal = 500;
+    int lunchGoal = 500;
+    int dinnerGoal = 500;
+    int snackGoal = 500;
 
 
-    double calorieConsumed =0;
-    double calorieGoal= 0;
+    int calorieConsumed =0;
+    int calorieGoal= 0;
     if (selectedMeal == "Breakfast") {
       calorieConsumed = breakfastCalorie;
       calorieGoal = breakfastGoal;
@@ -39,10 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     //algorithm to calculate total calorie consumption and goal
-    double totalcalorieConsumed = breakfastCalorie+lunchCalorie+dinnerCalorie+snackCalorie;
-    double totalcalorieGoal=breakfastGoal+lunchGoal+dinnerGoal+snackGoal;
+    int totalcalorieConsumed = breakfastCalorie+lunchCalorie+dinnerCalorie+snackCalorie;
+    int totalcalorieGoal=breakfastGoal+lunchGoal+dinnerGoal+snackGoal;
 
-    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: const Header(),
       body: SingleChildScrollView(
@@ -58,13 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width*0.5,
-                      child: Flexible(
-                        child: CalorieProgressIndicator(
-                          gradient: AppGradients.greenGradient,
-                          calorieConsumed: totalcalorieConsumed,
-                          calorieGoal: totalcalorieGoal,
-                          name: "Kcal available",
-                        ),
+                      child: CalorieProgressIndicator(
+                        gradient: AppGradients.greenGradient,
+                        calorieConsumed: totalcalorieConsumed,
+                        calorieGoal: totalcalorieGoal,
+                        name: "Kcal available",
                       ),
                     ),
                     Container(

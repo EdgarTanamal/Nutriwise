@@ -15,7 +15,7 @@ class AppColors{
   static const Color lightPurple = Color(0xFFB575E7);
   static const Color purple = Color(0xFFE341F5);
 
-  static const Color breakfastBG = Color(0xFFA8FFA8);
+  static const Color breakfastBG = Color(0xFFA0E4A0);
   static const Color lunchBG = Color(0xFFFF888A);
   static const Color dinnerBG = Color(0xFFAAC4FF);
   static const Color snackBG = Color(0xFFD4A9F5);

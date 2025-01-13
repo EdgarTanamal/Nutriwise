@@ -2,8 +2,8 @@ part of 'widgets.dart';
 
 class dailyMealsCard extends StatelessWidget {
   final String isSelected;
-  final double calorieConsumed;
-  final double calorieGoal;
+  final int calorieConsumed;
+  final int calorieGoal;
 
 
   const dailyMealsCard({
@@ -107,7 +107,7 @@ class dailyMealsCard extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                    "Recommended ${calorieGoal-calorieConsumed} Kcal",
+                                    "Recommended $calorieGoal Kcal",
                                   style: GoogleFonts.archivo(
                                     fontSize: 10,
                                     color: AppColors.subText
@@ -164,7 +164,7 @@ class dailyMealsCard extends StatelessWidget {
                               "See Details...",
                               textAlign: TextAlign.right,
                               style: GoogleFonts.archivo(
-                                fontSize: 10,
+                                fontSize: 14,
                                 color: AppColors.textColor
                               ),
                             ),

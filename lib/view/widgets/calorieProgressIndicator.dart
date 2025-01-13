@@ -1,8 +1,8 @@
 part of'widgets.dart';
 
 class CalorieProgressIndicator extends StatelessWidget {
-  final double calorieConsumed;
-  final double calorieGoal;
+  final int calorieConsumed;
+  final int calorieGoal;
   final Gradient gradient;
   final Gradient yellowGradient;
   final bool totalCalorie;
@@ -30,7 +30,6 @@ class CalorieProgressIndicator extends StatelessWidget {
     double sized = totalCalorie?screenWidth*0.30:screenWidth * 0.15; // Ukuran lingkaran 25% dari lebar layar
     double strokeWidth = totalCalorie?MediaQuery.of(context).size.width*0.03 :MediaQuery.of(context).size.width*0.01;
     double progress = calorieConsumed / calorieGoal;
-    double leftCalorie = calorieGoal-calorieConsumed;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -65,21 +64,26 @@ class CalorieProgressIndicator extends StatelessWidget {
 
               ),
               Text(
-                "$leftCalorie", // Persentase
+                "$calorieConsumed", // Persentase
                 style: GoogleFonts.archivo(
-                    fontSize: totalCalorie?screenWidth*0.04:screenWidth*0.02,
-                    color: calorieConsumed>calorieGoal?
-                    AppColors.yellow: AppColors.green,
+                    fontSize: totalCalorie?
+                              screenWidth*0.06:
+                              screenWidth*0.035,
+                    color: totalCalorie?
+                            calorieConsumed>calorieGoal?
+                              AppColors.yellow: Colors.green:
+                              AppColors.textColor,
                     fontWeight: FontWeight.bold
                 )
               ),
+              totalCalorie?
               Text(
-                totalCalorie?"Kcal available":"Kcal",
+                "Kcal available",
                 style: GoogleFonts.archivo(
-                    fontSize: totalCalorie?screenWidth*0.02:screenWidth*0.02,
+                    fontSize: totalCalorie?screenWidth*0.04:screenWidth*0.03,
                     color: totalCalorie? AppColors.subText:AppColors.textColor
                 ),
-              ),
+              ):SizedBox.shrink(),
             ],
           ),
         )
