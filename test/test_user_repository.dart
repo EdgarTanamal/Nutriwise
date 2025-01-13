@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:diabets/model/user.dart';
-import 'package:diabets/repository/user/userRepository.dart';
+import 'package:diabets/repository/userRepository.dart';
 
 void main() {
   // Setup Firebase
