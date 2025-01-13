@@ -3,6 +3,10 @@ part of'widgets.dart';
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({Key? key}) : super(key: key);
 
+  String _getCurrentDateTime() {
+    DateTime now = DateTime.now(); // Mendapatkan waktu saat ini
+    return DateFormat('dd MMM, EEEE').format(now); // Format seperti "2 May, Monday"
+  }
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -31,7 +35,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Text(
-              "2 May, Monday",
+              _getCurrentDateTime(),
               style: GoogleFonts.archivo(
                 color: AppColors.textColor,
                 fontSize: 16,
