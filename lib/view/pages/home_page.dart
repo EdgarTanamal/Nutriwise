@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.lightgreen,
+                  color: AppColors.button,
                   borderRadius: BorderRadius.circular(15), // Set your border radius here
                 ),
                 child: Padding(
