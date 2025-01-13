@@ -49,96 +49,94 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              height: screenHeight*0.4,
+              height: MediaQuery.of(context).size.width*0.6,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Larger circle
-                        CalorieProgressIndicator(
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.5,
+                      child: Flexible(
+                        child: CalorieProgressIndicator(
                           gradient: AppGradients.greenGradient,
                           calorieConsumed: totalcalorieConsumed,
                           calorieGoal: totalcalorieGoal,
-                          strokeWidth: 20,
-                          sized:150,
                           name: "Kcal available",
                         ),
-                      ],
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppPicture.consumePicture,
-                              width: 30,  // Increased size for better visibility
-                              height: 30,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(width: 10),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                    "$totalcalorieConsumed",
-                                    style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
-                                ),
-                                Text(
-                                    "eaten",
-                                    style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppPicture.caloriePicture,
-                              width: 40,  // Increased size for better visibility
-                              height: 40,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(width: 2),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                    "$totalcalorieGoal",
-                                    style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
-                                ),
-                                Text(
-                                    "Kcal Goal",
-                                    style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-        
-                      ],
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppPicture.consumePicture,
+                                width: 30,  // Increased size for better visibility
+                                height: 30,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(width: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      "$totalcalorieConsumed",
+                                      style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
+                                  ),
+                                  Text(
+                                      "eaten",
+                                      style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppPicture.caloriePicture,
+                                width: 40,  // Increased size for better visibility
+                                height: 40,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(width: 2),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      "$totalcalorieGoal",
+                                      style: GoogleFonts.archivo(fontSize: 24, color: AppColors.textColor, fontWeight: FontWeight.bold)
+                                  ),
+                                  Text(
+                                      "Kcal Goal",
+                                      style: GoogleFonts.archivo(fontSize: 10, color: AppColors.subText)
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
                 decoration: BoxDecoration(
                   color: AppColors.lightgreen,
@@ -164,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 32),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 70),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -198,8 +196,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: CalorieProgressIndicator(
                               calorieConsumed: breakfastCalorie,
                               calorieGoal: breakfastGoal,
-                              strokeWidth: 7,
-                              sized: 65,
                               name: "Kcal",
                               totalCalorie: false,
                               gradient: AppGradients.greenGradient,
@@ -220,8 +216,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               gradient: AppGradients.redGradient,
                               calorieConsumed: lunchCalorie,
                               calorieGoal: lunchGoal,
-                              strokeWidth: 7,
-                              sized:65,
                               name: "Kcal",
                               picture: AppPicture.afternoonPicture,
                               totalCalorie: false,
@@ -242,14 +236,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               gradient: AppGradients.blueGradient,
                               calorieConsumed: dinnerCalorie,
                               calorieGoal: dinnerGoal,
-                              strokeWidth: 7,
-                              sized:65,
                               name: "Kcal",
                               picture: AppPicture.moonPicture,
                               color: AppColors.dinnerBG,
                               isSelected: selectedMeal == "Dinner",
-                          
-                          
+
+
                             ),
                           ),
                         ),
@@ -264,8 +256,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               gradient: AppGradients.purpleGradient,
                               calorieConsumed: snackCalorie,
                               calorieGoal: snackGoal,
-                              strokeWidth: 7,
-                              sized:65,
                               name: "Kcal",
                               picture: AppPicture.snackPicture,
                               totalCalorie: false,
@@ -340,14 +330,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   ],
                 ) ,
-        
+
               )
-        
+
             )
-        
+
           ],
         ),
       ),
+      bottomNavigationBar: Navbar(),
     );
   }
 }

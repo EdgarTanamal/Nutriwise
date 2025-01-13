@@ -95,6 +95,15 @@ class AppPicture{
   static const String calendar = "assets/images/calendar.png";
   static const String notification = "assets/images/bell.png";
   static const String activenotification = "assets/images/active.png";
+  static const String history = "assets/images/history.png";
+  static const String historyActive = "assets/images/historyActive.png";
+  static const String home = "assets/images/home.png";
+  static const String homeActive = "assets/images/homeActive.png";
+  static const String search = "assets/images/search.png";
+  static const String searchActive = "assets/images/searchActive.png";
+  static const String user = "assets/images/user.png";
+  static const String userActive = "assets/images/userActive.png";
+  static const String camera = "assets/images/camera.png";
 
 }
 

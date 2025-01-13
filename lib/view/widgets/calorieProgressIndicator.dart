@@ -5,8 +5,6 @@ class CalorieProgressIndicator extends StatelessWidget {
   final double calorieGoal;
   final Gradient gradient;
   final Gradient yellowGradient;
-  final double strokeWidth;
-  final double sized;
   final bool totalCalorie;
   final String picture;
   final String name;
@@ -17,8 +15,6 @@ class CalorieProgressIndicator extends StatelessWidget {
     Key? key,
     required this.calorieConsumed,
     required this.calorieGoal,
-    required this.strokeWidth,
-    required this.sized,
     required this.name,
     required this.gradient,
     this.yellowGradient = AppGradients.yellowGradient,
@@ -30,7 +26,9 @@ class CalorieProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    double screenWidth = MediaQuery.of(context).size.width;
+    double sized = totalCalorie?screenWidth*0.30:screenWidth * 0.15; // Ukuran lingkaran 25% dari lebar layar
+    double strokeWidth = totalCalorie?MediaQuery.of(context).size.width*0.03 :MediaQuery.of(context).size.width*0.01;
     double progress = calorieConsumed / calorieGoal;
     double leftCalorie = calorieGoal-calorieConsumed;
     return Stack(
@@ -41,7 +39,7 @@ class CalorieProgressIndicator extends StatelessWidget {
           height:  sized + (isSelected ? 10 : 0),
           decoration: BoxDecoration(
             color: totalCalorie ? null : color,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(sized),
             border: isSelected
                 ? Border.all(color: Colors.blue, width: 6) // Border biru jika aktif
                 : null,
@@ -51,36 +49,39 @@ class CalorieProgressIndicator extends StatelessWidget {
           ),
         ),
 
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            totalCalorie?
-            SizedBox.shrink() :
-            Image.asset(
-               picture,
-               height: 20,
-              width: 20,
-              fit: BoxFit.fill,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              totalCalorie?
+              SizedBox.shrink() :
+              Image.asset(
+                 picture,
+                 height: screenWidth*0.05,
+                width: screenWidth*0.05,
+                fit: BoxFit.fill,
 
-            ),
-            Text(
-              "$leftCalorie", // Persentase
-              style: GoogleFonts.archivo(
-                  fontSize: totalCalorie?36:10,
-                  color: calorieConsumed>calorieGoal?
-                  AppColors.yellow: AppColors.green,
-                  fontWeight: FontWeight.bold
-              )
-            ),
-            Text(
-              totalCalorie?"Kcal available":"Kcal",
-              style: GoogleFonts.archivo(
-                  fontSize: 10,
-                  color: totalCalorie? AppColors.subText:AppColors.textColor
               ),
-            ),
-          ],
+              Text(
+                "$leftCalorie", // Persentase
+                style: GoogleFonts.archivo(
+                    fontSize: totalCalorie?screenWidth*0.04:screenWidth*0.02,
+                    color: calorieConsumed>calorieGoal?
+                    AppColors.yellow: AppColors.green,
+                    fontWeight: FontWeight.bold
+                )
+              ),
+              Text(
+                totalCalorie?"Kcal available":"Kcal",
+                style: GoogleFonts.archivo(
+                    fontSize: totalCalorie?screenWidth*0.02:screenWidth*0.02,
+                    color: totalCalorie? AppColors.subText:AppColors.textColor
+                ),
+              ),
+            ],
+          ),
         )
       ],
     );
