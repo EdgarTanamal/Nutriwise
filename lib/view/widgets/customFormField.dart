@@ -7,9 +7,8 @@ class Customformfield extends StatelessWidget {
   final bool isUnit;
   final String unit;
   final bool isNumber;
-
-
-
+  final bool isPrivate;
+  final String? Function(String?)? validator;
 
   const Customformfield({
     super.key,
@@ -19,8 +18,8 @@ class Customformfield extends StatelessWidget {
     this.isUnit = false,
     this.unit = "",
     this.isNumber=false,
-
-
+    this.isPrivate=false,
+    this.validator
   });
 
   @override
@@ -38,6 +37,7 @@ class Customformfield extends StatelessWidget {
         ),
         SizedBox(height: 8),
         TextFormField(
+          obscureText: isPrivate?true:false,
           controller: selectedController,
           keyboardType: isNumber?TextInputType.number:TextInputType.text,
           decoration: InputDecoration(
@@ -83,6 +83,10 @@ class Customformfield extends StatelessWidget {
             ),
           ),
           validator: (value) {
+            if (validator != null) {
+              return validator!(value);
+            }
+
             if (value == null || value.isEmpty) {
               return 'This field cannot be empty';
             }

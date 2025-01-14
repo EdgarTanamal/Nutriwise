@@ -1,7 +1,7 @@
 part of 'widgets.dart';
 
 class Custombutton extends StatelessWidget {
-  final VoidCallback? submitForm;
+  final Future<void> Function()? submitForm;
   final String detail;
   final String route;
   final GlobalKey<FormState>? formKey;
@@ -24,15 +24,22 @@ class Custombutton extends StatelessWidget {
       width: double.infinity,
       height: 43,
       child: ElevatedButton(
-        onPressed:(){
+        onPressed:() async {
           if (shouldNavigate) {
             Navigator.pushNamed(context, route);
           } else {
             // Jika tombol digunakan untuk validasi dan submit form
             if (formKey?.currentState?.validate() ?? false) {
               if (submitForm != null) {
-                submitForm!();
-                Navigator.pushNamed(context, route);
+                try{
+                  await submitForm!();
+
+                  Navigator.pushNamed(context, route);
+                }catch(e){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(e.toString())),
+                  );
+                }
               }
             } else {
               ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,6 @@
 
 
+import 'package:diabets/model/survey.dart';
 import 'package:diabets/shared/shared.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
