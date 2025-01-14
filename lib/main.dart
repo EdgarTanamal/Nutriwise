@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) =>  HomeScreen(), // Rute untuk home screen
         '/login': (context) => LoginPage(), // Rute untuk login screen
         '/register': (context) => RegisterPage(), // Rute untuk register screen
+        '/introsurvey':(context) => IntroScreen(),
+        '/survey':(context) => SurveyScreen(),
         //'/gallery': (context) => const GalleryPage(), // Rute untuk gallery screen
         //'/trashbin': (context) => const TrashbinPage(), // Rute untuk trashbin screen
       },

@@ -15,3 +15,6 @@ part 'descriptionCard.dart';
 part 'widgetCard.dart';
 part 'header.dart';
 part 'navbar.dart';
+part 'customFormField.dart';
+part 'customDropDown.dart';
+part 'customButton.dart';

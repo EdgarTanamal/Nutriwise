@@ -80,7 +80,7 @@ class CalorieProgressIndicator extends StatelessWidget {
               Text(
                 "Kcal available",
                 style: GoogleFonts.archivo(
-                    fontSize: totalCalorie?screenWidth*0.04:screenWidth*0.03,
+                    fontSize: totalCalorie?screenWidth*0.035:screenWidth*0.03,
                     color: totalCalorie? AppColors.subText:AppColors.textColor
                 ),
               ):SizedBox.shrink(),

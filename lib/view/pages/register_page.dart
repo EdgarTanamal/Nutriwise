@@ -50,7 +50,7 @@ class RegisterPage extends StatelessWidget {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, '/introsurvey');
 
               },
               style: ElevatedButton.styleFrom(

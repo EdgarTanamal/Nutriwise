@@ -104,7 +104,7 @@ class AppPicture{
   static const String user = "assets/images/user.png";
   static const String userActive = "assets/images/userActive.png";
   static const String camera = "assets/images/camera.png";
-
+  static const String survey = "assets/images/survey.png";
 }
 
 
