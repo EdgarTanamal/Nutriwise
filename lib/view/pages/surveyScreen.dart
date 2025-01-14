@@ -7,81 +7,10 @@ class SurveyScreen extends StatefulWidget {
 }
 
 class _SurveyScreenState extends State<SurveyScreen> {
-  String? selectedGender = "Male"; // Default gender
-  String? selectedActivity;
-  String? selectedPurpose;
-
-  final TextEditingController ageController = TextEditingController();
-  final TextEditingController heightController = TextEditingController();
-  final TextEditingController weightController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
-
-  final List<String> activities = ["Low", "Medium", "High"];
-  final List<String> purposes = ["Health", "Fitness", "Diet"];
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void handleActivityChange(String? value) {
-    setState(() {
-      selectedActivity = value;
-    });
-  }
-  void handlepurposeChange(String? value) {
-    setState(() {
-      selectedPurpose = value;
-    });
-  }
+  SurveyViewModel surveyViewModel =SurveyViewModel();
 
   // Function to submit the form data
-  void submitForm() {
-    if (selectedGender == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please select your gender")),
-      );
-      return;
-    }
-    if (ageController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please enter your age")),
-      );
-      return;
-    }
-    if (heightController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please enter your height")),
-      );
-      return;
-    }
-    if (weightController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please enter your weight")),
-      );
-      return;
-    }
-    if (selectedActivity == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please select an activity level")),
-      );
-      return;
-    }
-    if (selectedPurpose == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please select your purpose")),
-      );
-      return;
-    }
-    Map<String, dynamic> formData = {
-      "gender": selectedGender,
-      "age": ageController.text,
-      "height": heightController.text,
-      "weight": weightController.text,
-      "routineActivity": selectedActivity,
-      "purpose": selectedPurpose,
-    };
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Form submitted successfully!")),
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +34,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
               children: [
                 Customformfield(
                   question: "Username",
-                  selectedController: usernameController,
+                  selectedController: surveyViewModel.usernameController,
                   hintText: "Enter username",
                 ),
                 SizedBox(height: 16),
@@ -120,17 +49,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
                           Radio<String>(
                             activeColor: AppColors.green,
                             value: "Male",
-                            groupValue: selectedGender,
+                            groupValue: surveyViewModel.selectedGender,
                             onChanged: (value) {
                               setState(() {
-                                selectedGender = value;
+                                surveyViewModel.selectedGender = value;
                               });
                             },
                           ),
                           GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  selectedGender = "Male"; // Perbarui nilai radio
+                                  surveyViewModel.selectedGender = "Male"; // Perbarui nilai radio
                                 });
                               },
                               child: Text(
@@ -151,17 +80,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
                           Radio<String>(
                             activeColor: AppColors.green,
                             value: "Female",
-                            groupValue: selectedGender,
+                            groupValue: surveyViewModel.selectedGender,
                             onChanged: (value) {
                               setState(() {
-                                selectedGender = value;
+                                surveyViewModel.selectedGender = value;
                               });
                             },
                           ),
                           GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  selectedGender = "Female"; // Perbarui nilai radio
+                                  surveyViewModel.selectedGender = "Female"; // Perbarui nilai radio
                                 });
                               },
                               child: Text(
@@ -180,14 +109,14 @@ class _SurveyScreenState extends State<SurveyScreen> {
                 SizedBox(height: 16),
                 Customformfield(
                   question: "How old are you currently?",
-                  selectedController: ageController,
+                  selectedController: surveyViewModel.ageController,
                   hintText: "e.g., 25",
                   isNumber: true,
                 ),
                 SizedBox(height: 16),
                 Customformfield(
                   question: "What is Your Height?",
-                  selectedController: heightController,
+                  selectedController: surveyViewModel.heightController,
                   hintText: "e.g., 170",
                   isNumber: true,
                   isUnit: true,
@@ -196,7 +125,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                 SizedBox(height: 16),
                 Customformfield(
                   question: "What is Your Current Weight?",
-                  selectedController: weightController,
+                  selectedController: surveyViewModel.weightController,
                   hintText: "e.g., 65",
                   isNumber: true,
                   isUnit: true,
@@ -205,22 +134,22 @@ class _SurveyScreenState extends State<SurveyScreen> {
                 SizedBox(height: 16),
                 Customdropdown(
                     question: "How Active is your Daily Routine?",
-                    activities: activities,
+                    activities: surveyViewModel.activities,
                     hint: "choose an activity level",
-                  onChanged: handleActivityChange,
+                  onChanged: surveyViewModel.handleActivityChange,
                 ),
                 SizedBox(height: 16),
                 Customdropdown(
                   question: "What is your main Purpose for Using this App?",
-                  activities: purposes,
+                  activities: surveyViewModel.purposes,
                   hint: "choose your main goal for this app",
-                  onChanged: handlepurposeChange,
+                  onChanged: surveyViewModel.handlePurposeChange,
                 ),
                 SizedBox(height: 24),
                 Custombutton(
                   detail: "Submit",
                   route: "/home",
-                  submitForm:submitForm,
+                  submitForm: surveyViewModel.submitForm,
                   formKey: _formKey,
                   shouldNavigate: false,
                 ),
