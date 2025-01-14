@@ -1,10 +1,6 @@
 import 'package:diabets/view/pages/pages.dart';
-import 'package:diabets/view/pages/login_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'data/network/firebaseAuthServices.dart';
 import 'data/network/firebaseService.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
