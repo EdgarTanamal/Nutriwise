@@ -28,14 +28,21 @@ class SurveyRepository{
     }
   }
 
-  Future<SurveyModel?> readSurveybyUID(String surveyID) async {
+  Future<SurveyModel?> readSurveyDetails() async {
     try {
       final CollectionReference surveyCollection = getSurveyCollection();
-      DocumentSnapshot surveyDoc = await surveyCollection.doc(surveyID).get();
+      QuerySnapshot snapshot = await surveyCollection.limit(1).get(); // Ambil satu dokumen saja
 
-      if (surveyDoc.exists) {
-        return SurveyModel.fromFirestore(surveyDoc.data() as Map<String, dynamic>, surveyDoc.id);
-      } else {
+
+      if (snapshot.docs.isNotEmpty) {
+        String surveyID = snapshot.docs.first.id;
+        DocumentSnapshot surveyDoc = await surveyCollection.doc(surveyID).get();
+        if (surveyDoc.exists) {
+          return SurveyModel.fromFirestore(surveyDoc.data() as Map<String, dynamic>, surveyDoc.id);
+        } else {
+          print('Survey with ID $surveyID not found');
+          return null;
+        }      } else {
         print('Survey not found');
         return null;
       }
