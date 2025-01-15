@@ -69,8 +69,8 @@ class LoginViewModel extends ChangeNotifier{
       if (user != null) {
         UserModel userModel = UserModel(
           id: user.uid,
+          username: '',
           email: user.email ?? '',
-          name: '',
           phone: '', // Nama bisa ditambahkan nanti
         );
         await userRepository.createUser(userModel);
@@ -98,7 +98,7 @@ class LoginViewModel extends ChangeNotifier{
         UserModel? userModel = await userRepository.readUserbyUid(user.uid);
 
         if (userModel != null) {
-          print('Login berhasil. Nama user: ${userModel.name}');
+          print('Login berhasil. Nama user: ${userModel.id}');
         } else {
           print('Data user tidak ditemukan di Firestore.');
         }

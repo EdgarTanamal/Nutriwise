@@ -1,6 +1,5 @@
 class SurveyModel {
   final String? id;
-  final String username;
   final String gender;
   final String age;
   final String height;
@@ -10,7 +9,6 @@ class SurveyModel {
 
   SurveyModel({
     this.id,
-    required this.username,
     required this.gender,
     required this.age,
     required this.height,
@@ -22,7 +20,6 @@ class SurveyModel {
   factory SurveyModel.fromFirestore(Map<String, dynamic> data, String id) {
     return SurveyModel(
       id: id,
-      username: data['username']??'',
       gender: data['gender'] ?? '',
       age: data['age'] ?? '',
       height: data['height'] ??'',
@@ -33,7 +30,6 @@ class SurveyModel {
   }// Convert UserModel to Map for saving to Firestore
   Map<String, dynamic> toMap() {
     return {
-      'username' : username,
       'gender': gender,
       'age': age,
       'height': height,
@@ -45,7 +41,6 @@ class SurveyModel {
   // Method to copy and modify a UserModel instance
   SurveyModel copyWith({
     String? id,
-    String? username,
     String? gender,
     String? age,
     String? height,
@@ -55,7 +50,6 @@ class SurveyModel {
   }) {
     return SurveyModel(
       id: id ?? this.id,
-      username: username ?? this.username,
       gender: gender ?? this.gender,
       age: age ?? this.age,
       height: height ?? this.height,

@@ -1,9 +1,9 @@
 part of 'viewmodel.dart';
-//
-// class SurveyViewModel extends ChangeNotifier{
 
 class SurveyViewModel extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  SurveyRepository? _surveyRepository;
+  Future? _userRepository;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -19,16 +19,51 @@ class SurveyViewModel extends ChangeNotifier {
   final List<String> activities = ["Low", "Medium", "High"];
   final List<String> purposes = ["Health", "Fitness", "Diet"];
 
+  void updateUsername() {
+    User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      UserModel currentUser = UserModel(
+        id: firebaseUser.uid,
+        username: usernameController.text,
+        email: firebaseUser.email,
+        phone: firebaseUser.phoneNumber,
+      );
+      _userRepository = UserRepository().updateUser(currentUser);
+    } else {
+      print("Username is Empty");
+    }
+  }
+  // Method to initialize the SurveyRepository
+  void initializeSurveyRepository() {
+    User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      UserModel currentUser = UserModel(
+        id: firebaseUser.uid,
+        username: firebaseUser.displayName,
+        email: firebaseUser.email,
+        phone: firebaseUser.phoneNumber,
+      );
+      _surveyRepository = SurveyRepository(currentUser);
+    } else {
+      print("No user is logged in");
+    }
+  }
+
+
+
+  // Handle activity selection change
   void handleActivityChange(String? value) {
     selectedActivity = value;
     notifyListeners();
   }
 
+  // Handle purpose selection change
   void handlePurposeChange(String? value) {
     selectedPurpose = value;
     notifyListeners();
   }
 
+  // Form validation
   String? validateForm() {
     if (selectedGender == null) return "Please select your gender";
     if (ageController.text.isEmpty) return "Please enter your age";
@@ -39,15 +74,17 @@ class SurveyViewModel extends ChangeNotifier {
     return null;
   }
 
+  // Submit form
   Future<void> submitForm() async {
     final error = validateForm();
     if (error != null) {
-      throw Exception(error); // Tangani error di UI
+      throw Exception(error); // Handle error in the UI
     }
-    _isLoading=true;
+
+    _isLoading = true;
     notifyListeners();
+
     final survey = SurveyModel(
-      username: usernameController.text,
       gender: selectedGender!,
       age: ageController.text,
       height: heightController.text,
@@ -56,40 +93,24 @@ class SurveyViewModel extends ChangeNotifier {
       purpose: selectedPurpose!,
     );
 
-    print(survey.toMap());
-    try{
-      // await repository.createSurvey(survey);
-    }catch(e){
-      throw Exception("Failed to submit survey: $e");
 
-    }finally{
-      _isLoading=false;
+    print(survey.toMap());
+    try {
+      initializeSurveyRepository();
+      if (_surveyRepository != null) {
+        await _surveyRepository!.createSurvey(survey); // Call the repository to create survey
+        if(usernameController.text.isNotEmpty){
+          updateUsername();
+        }
+      } else {
+        print("Survey repository is not initialized");
+        print(_surveyRepository);
+      }
+    } catch (e) {
+      throw Exception("Failed to submit survey: $e");
+    } finally {
+      _isLoading = false;
       notifyListeners();
     }
   }
 }
-
-
-//   final SurveyRepository _surveyService;
-//   final UserModel currentUser;
-//   bool _isLoading = false;
-//
-//   SurveyViewModel({
-//     required this.currentUser,
-//   }) : _surveyService = SurveyRepository(currentUser);
-//
-//   bool get isLoading => _isLoading;
-//
-//   Future<void> createSurvey(SurveyModel survey) async{
-//     _isLoading = true;
-//     notifyListeners();
-//     try{
-//       await _surveyService.createSurvey(survey);
-//     }catch(e){
-//       print("Error creating survey: $e");
-//     }finally{
-//       _isLoading= false;
-//       notifyListeners();
-//     }
-//   }
-// }

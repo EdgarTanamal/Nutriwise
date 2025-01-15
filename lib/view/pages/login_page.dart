@@ -60,6 +60,7 @@ class LoginPage extends StatelessWidget {
                               route: '/home',
                               formKey: _formKey,
                               submitForm: loginViewModel.loginUser,
+                              useLoading: loginViewModel.isLoading,
                             ),
                             SizedBox(height: 16),
                           ],

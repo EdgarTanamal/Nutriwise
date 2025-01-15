@@ -68,7 +68,7 @@ class RegisterPage extends StatelessWidget {
                               route: '/introsurvey',
                               formKey: _formKey,
                               submitForm: loginViewModel.registerUser,
-
+                              useLoading: loginViewModel.isLoading,
                             ),
                           ],
                         );

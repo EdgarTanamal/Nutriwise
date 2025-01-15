@@ -17,8 +17,11 @@ class SurveyRepository{
   Future<void> createSurvey(SurveyModel survey) async {
     try{
       final CollectionReference surveyCollection = getSurveyCollection();
-      await surveyCollection.doc(survey.id).set(survey.toMap());
-      print('Survey added successfully!');
+      final docRef = await surveyCollection.add(survey.toMap());
+      final updatedSurvey = survey.copyWith(id: docRef.id );
+      print('Survey added successfully with ID: ${updatedSurvey.id}');
+
+
     }catch(e){
       print('Error adding Survey: $e');
 
