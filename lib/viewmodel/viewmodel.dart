@@ -10,3 +10,4 @@ import '../repository/userRepository.dart';
 
 part 'surveyViewModel.dart';
 part 'loginViewModel.dart';
+part 'homeViewModel.dart';
