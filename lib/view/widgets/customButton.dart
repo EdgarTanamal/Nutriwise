@@ -6,6 +6,7 @@ class Custombutton extends StatelessWidget {
   final String route;
   final GlobalKey<FormState>? formKey;
   final bool shouldNavigate;
+  final bool? useLoading;
 
 
   const Custombutton({
@@ -15,16 +16,21 @@ class Custombutton extends StatelessWidget {
     required this.route,
     this.formKey,
     this.shouldNavigate=false,
+    this.useLoading
 
   });
-
   @override
   Widget build(BuildContext context) {
+    final loginViewModel = Provider.of<LoginViewModel?>(context, listen: true);
+    final bool effectiveLoadingState = useLoading ?? loginViewModel?.isLoading ?? false;
+
     return Container(
       width: double.infinity,
       height: 43,
-      child: ElevatedButton(
-        onPressed:() async {
+      child: effectiveLoadingState?
+      Center(child: CircularProgressIndicator()):
+      ElevatedButton(
+        onPressed:effectiveLoadingState? null:() async {
           if (shouldNavigate) {
             Navigator.pushNamed(context, route);
           } else {
@@ -33,7 +39,6 @@ class Custombutton extends StatelessWidget {
               if (submitForm != null) {
                 try{
                   await submitForm!();
-
                   Navigator.pushNamed(context, route);
                 }catch(e){
                   ScaffoldMessenger.of(context).showSnackBar(

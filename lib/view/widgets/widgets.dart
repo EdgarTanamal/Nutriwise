@@ -2,10 +2,12 @@
 
 import 'package:diabets/model/survey.dart';
 import 'package:diabets/shared/shared.dart';
+import 'package:diabets/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 
 
