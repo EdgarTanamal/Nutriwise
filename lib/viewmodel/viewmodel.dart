@@ -7,6 +7,7 @@ import 'package:diabets/repository/surveyRepository.dart';
 import '../data/network/firebaseAuthServices.dart';
 import '../model/user.dart';
 import '../repository/userRepository.dart';
+import '../shared/shared.dart';
 
 part 'surveyViewModel.dart';
 part 'loginViewModel.dart';

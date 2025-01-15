@@ -1,62 +1,15 @@
 part of 'widgets.dart';
 
 class dailyMealsCard extends StatelessWidget {
-  final String isSelected;
-  final int calorieConsumed;
-  final int calorieGoal;
 
 
   const dailyMealsCard({
     super.key,
-    required this.calorieConsumed,
-    required this.calorieGoal,
-    required this.isSelected,
-
   });
 
   @override
   Widget build(BuildContext context) {
-    Color cardColor;
-    List<Map<String, String>> descriptionCards;
-
-    switch (isSelected) {
-      case "Breakfast":
-        cardColor =AppColors.green;
-        descriptionCards = [
-          {"food": "Coffee with milk", "amount": "100g", "calorie": "56 Kcal"},
-          {"food": "Sandwich", "amount": "100g", "calorie": "250 Kcal"},
-          {"food": "Omelette", "amount": "100g", "calorie": "100 Kcal"},
-        ];
-        break;
-      case "Lunch":
-        cardColor = AppColors.red; // Warna merah
-        descriptionCards = [
-          {"food": "Grilled Chicken", "amount": "200g", "calorie": "300 Kcal"},
-          {"food": "Rice", "amount": "150g", "calorie": "200 Kcal"},
-          {"food": "Salad", "amount": "100g", "calorie": "50 Kcal"},
-        ];
-        break;
-      case "Dinner":
-        cardColor = AppColors.blue; // Warna biru
-        descriptionCards = [
-          {"food": "Soup", "amount": "150g", "calorie": "100 Kcal"},
-          {"food": "Steak", "amount": "200g", "calorie": "400 Kcal"},
-          {"food": "Veggies", "amount": "100g", "calorie": "70 Kcal"},
-        ];
-        break;
-      case "Snack":
-        cardColor = AppColors.purple; // Warna ungu
-        descriptionCards = [
-          {"food": "Chips", "amount": "50g", "calorie": "150 Kcal"},
-          {"food": "Cookies", "amount": "100g", "calorie": "250 Kcal"},
-          {"food": "Juice", "amount": "200ml", "calorie": "100 Kcal"},
-        ];
-        break;
-      default:
-        cardColor = AppColors.backgroundCard; // Default warna kartu
-        descriptionCards = [];
-    }
-
+    final homeViewModel = Provider.of<HomeViewModel>(context);
     return Stack(
       alignment: Alignment.centerRight,
       children: [
@@ -67,7 +20,7 @@ class dailyMealsCard extends StatelessWidget {
               Container(
                 width: 10,
                 decoration: BoxDecoration(
-                  color: cardColor,
+                  color: homeViewModel.cardColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft:Radius.circular(5),
                       topLeft:Radius.circular(5)
@@ -90,14 +43,14 @@ class dailyMealsCard extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                        "$isSelected ",
+                                        "${homeViewModel.selectedMeal} ",
                                       style: GoogleFonts.archivo(
                                         fontSize: 18,
-                                        color: cardColor,
+                                        color: homeViewModel.cardColor,
                                       ),
                                     ),
                                     Text(
-                                        "$calorieConsumed Kcal",
+                                        "${homeViewModel.calorieConsumed} Kcal",
                                       style: GoogleFonts.archivo(
                                         fontSize: 18,
                                         color: AppColors.textColor,
@@ -107,7 +60,7 @@ class dailyMealsCard extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                    "Recommended $calorieGoal Kcal",
+                                    "Recommended ${homeViewModel.calorieGoal} Kcal",
                                   style: GoogleFonts.archivo(
                                     fontSize: 10,
                                     color: AppColors.subText
@@ -134,7 +87,7 @@ class dailyMealsCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 20),
-                        descriptionCards.isEmpty
+                        homeViewModel.descriptionCards.isEmpty
                             ?Container(
                                 height: 70,
                                 child: Center(
@@ -148,7 +101,7 @@ class dailyMealsCard extends StatelessWidget {
                                 ),
                               )
                             :Column(
-                                children: descriptionCards.map((desc) {
+                                children: homeViewModel.descriptionCards.map((desc) {
                                   return descriptionCard(
                                     food: desc["food"] ?? "",
                                     amount: desc["amount"] ?? "",

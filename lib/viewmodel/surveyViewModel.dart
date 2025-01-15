@@ -16,8 +16,8 @@ class SurveyViewModel extends ChangeNotifier {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
 
-  final List<String> activities = ["Low", "Medium", "High"];
-  final List<String> purposes = ["Health", "Fitness", "Diet"];
+  final List<String> activities = ["Lightly Active (Office Job)", "Moderately Active", "Very Active (Mostly Physically Job)", "Extremely Active (Heavy Physically Job)"];
+  final List<String> purposes = ["Weight Loss", "Healthy", "Weight Gain"];
 
   void updateUsername() {
     User? firebaseUser = _auth.currentUser;

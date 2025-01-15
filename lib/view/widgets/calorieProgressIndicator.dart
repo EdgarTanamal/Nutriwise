@@ -64,7 +64,7 @@ class CalorieProgressIndicator extends StatelessWidget {
 
               ),
               Text(
-                "$calorieConsumed", // Persentase
+                totalCalorie?"${calorieGoal-calorieConsumed}":"$calorieConsumed", // Persentase
                 style: GoogleFonts.archivo(
                     fontSize: totalCalorie?
                               screenWidth*0.06:
