@@ -40,7 +40,7 @@ class CalorieProgressIndicator extends StatelessWidget {
             color: totalCalorie ? null : color,
             borderRadius: BorderRadius.circular(sized),
             border: isSelected
-                ? Border.all(color: Colors.blue, width: 6) // Border biru jika aktif
+                ? Border.all(color: Colors.blue.withOpacity(0.5), width: 6) // Border biru jika aktif
                 : null,
           ),
           child: CustomPaint(
