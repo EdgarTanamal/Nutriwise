@@ -1,11 +1,18 @@
 import 'package:diabets/view/pages/pages.dart';
+import 'package:diabets/viewmodel/viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'data/network/firebaseService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseService.initializeFirebase();
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LoginViewModel(),
+      child: MyApp()
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

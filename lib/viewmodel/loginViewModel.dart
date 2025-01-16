@@ -5,7 +5,11 @@ class LoginViewModel extends ChangeNotifier{
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
   bool _isLoading = false;
+  SurveyModel? surveyDetails;
   bool get isLoading => _isLoading;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  SurveyRepository? _surveyRepository;
+
 
   String? validateEmail() {
     if (emailController.text.isEmpty) {
@@ -54,6 +58,56 @@ class LoginViewModel extends ChangeNotifier{
   String? validateLoginForm() {
     return validateEmail() ?? validateLoginPassword();
   }
+
+  void initializeSurveyRepository() {
+    User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      UserModel currentUser = UserModel(
+        id: firebaseUser.uid,
+        username: firebaseUser.displayName,
+        email: firebaseUser.email,
+        phone: firebaseUser.phoneNumber,
+      );
+      _surveyRepository = SurveyRepository(currentUser);
+    } else {
+      print("No user is logged in");
+    }
+  }
+
+  Future<String?> handleUserNavigation() async {
+    final currentUser = _auth.currentUser;
+    initializeSurveyRepository();
+      try{
+        if (currentUser != null) {
+          // Periksa apakah survei sudah selesai
+          final surveyCompleted = await _checkSurveyStatus();
+          if (surveyCompleted) {
+            return '/home'; // Navigasi ke home jika survei selesai
+          } else {
+            return '/introsurvey'; // Navigasi ke survey jika survei belum selesai
+          }
+        } else {
+          return '/login'; // Navigasi ke login jika belum login
+        }
+      }catch(e){
+        print(e);
+      }
+  }
+
+  // Fungsi untuk memeriksa status survei pengguna
+  Future<bool> _checkSurveyStatus() async {
+    try {
+      surveyDetails = await _surveyRepository?.readSurveyDetails();
+      if(surveyDetails!= null){
+        return true;
+      }
+    } catch (e) {
+      print('Error checking survey status: $e');
+    }
+    return false; // Default jika terjadi kesalahan atau data tidak ditemukan
+  }
+
+
   Future<void> registerUser() async {
     final error = validateRegisterForm();
     if (error != null) {

@@ -39,7 +39,7 @@ class Custombutton extends StatelessWidget {
               if (submitForm != null) {
                 try{
                   await submitForm!();
-                  Navigator.pushNamed(context, route);
+                  Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
                 }catch(e){
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(e.toString())),
