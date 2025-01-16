@@ -25,8 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
       child: FutureBuilder(
         future: homeViewModel.fetchSurveyDetails(),
         builder: (context, snapshot){
-          if (homeViewModel.isLoading == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+          if (homeViewModel.isLoading) {
+            return Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.white,
+                child: Center(child: CircularProgressIndicator()));
           }
           return Consumer<HomeViewModel>(
             builder: (context, homeViewModel, _){
