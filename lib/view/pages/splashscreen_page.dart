@@ -11,18 +11,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Const.initializeCache(); // Menginisialisasi cache atau pengaturan awal
-    // Tunda navigasi ke halaman beranda selama 4 detik
-    Future.delayed(const Duration(seconds: 4), () async {
-      if (Const.userId != 0 && Const.auth.isNotEmpty) {
-        // Jika user sudah login, arahkan ke halaman home
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        // Jika user belum login, arahkan ke halaman register
-        Navigator.pushReplacementNamed(context, '/register');
-      }
+
+    // Pastikan Firebase sudah selesai inisialisasi
+    Firebase.initializeApp().then((_) {
+      Future.delayed(const Duration(seconds: 4), () async {
+        try {
+          // Mengakses LoginViewModel untuk mendapatkan route
+          final loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
+          final route = await loginViewModel.handleUserNavigation();
+          // Jika route tidak null, lakukan navigasi
+          if (route != null) {
+            // Navigasi setelah menunggu 4 detik
+            if (mounted) {
+              await Navigator.pushReplacementNamed(context, route);
+            }
+          }
+        } catch (e) {
+          print('Error navigating user: $e');
+        }
+      });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
