@@ -21,20 +21,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'NutriWise',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/splash', // Tentukan rute awal sebagai splash screen
+      initialRoute: '/history', // Tentukan rute awal sebagai splash screen
       routes: {
         '/splash': (context) => const SplashScreen(), // Rute untuk splash screen
         '/home': (context) =>  HomeScreen(), // Rute untuk home screen
         '/login': (context) => LoginPage(), // Rute untuk login screen
         '/register': (context) => RegisterPage(), // Rute untuk register screen
-        '/introsurvey':(context) => IntroScreen(),
+        '/article': (context) => ArticlePage(), // Rute untuk article
+        '/history': (context) => const HistoryDailyMealPage(), // Rute untuk history
+        '/camera': (context) => CameraPage(), // Rute untuk camera
+        '/introSurvey':(context) => IntroScreen(),
         '/survey':(context) => SurveyScreen(),
+        '/notification' : (context) => NotificationPage(),
+
         //'/gallery': (context) => const GalleryPage(), // Rute untuk gallery screen
         //'/trashbin': (context) => const TrashbinPage(), // Rute untuk trashbin screen
       },

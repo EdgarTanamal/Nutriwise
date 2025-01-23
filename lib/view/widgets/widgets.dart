@@ -2,6 +2,7 @@
 
 import 'package:diabets/model/survey.dart';
 import 'package:diabets/shared/shared.dart';
+import 'package:diabets/view/pages/pages.dart';
 import 'package:diabets/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

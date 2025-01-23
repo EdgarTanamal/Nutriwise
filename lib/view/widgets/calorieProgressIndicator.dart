@@ -12,7 +12,7 @@ class CalorieProgressIndicator extends StatelessWidget {
   final bool isSelected;
 
   const CalorieProgressIndicator({
-    Key? key,
+    super.key,
     required this.calorieConsumed,
     required this.calorieGoal,
     required this.name,
@@ -22,7 +22,7 @@ class CalorieProgressIndicator extends StatelessWidget {
     this.picture = "",
     this.color = Colors.greenAccent,
     this.isSelected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
