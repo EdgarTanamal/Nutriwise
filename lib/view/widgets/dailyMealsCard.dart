@@ -113,14 +113,20 @@ class dailyMealsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(
-                              "See Details...",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.archivo(
-                                fontSize: 14,
-                                color: AppColors.textColor
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryDailyMealPage()),
+                                );
+                              },
+                              child: Text(
+                                "See Details...",
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.archivo(
+                                    fontSize: 14,
+                                    color: AppColors.textColor
+                                ),
                               ),
-                            ),
+                            )
                           ],
                         )
                       ],

@@ -37,10 +37,10 @@ class _NavbarState extends State<Navbar> {
             Navigator.pushNamed(context, '/camera');
           }
           break;
-        case 3: // History
+        case 3: // Article
         // Periksa apakah sudah berada di halaman History
-          if (ModalRoute.of(context)?.settings.name != '/history') {
-            Navigator.pushNamed(context, '/history');
+          if (ModalRoute.of(context)?.settings.name != '/article') {
+            Navigator.pushNamed(context, '/article');
           }
           break;
         case 4: // Profile

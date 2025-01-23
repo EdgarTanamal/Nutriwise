@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/splash', // Tentukan rute awal sebagai splash screen
+      initialRoute: '/history', // Tentukan rute awal sebagai splash screen
       routes: {
         '/splash': (context) => const SplashScreen(), // Rute untuk splash screen
         '/home': (context) =>  HomeScreen(), // Rute untuk home screen
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/camera': (context) => CameraPage(), // Rute untuk camera
         '/introSurvey':(context) => IntroScreen(),
         '/survey':(context) => SurveyScreen(),
+        '/notification' : (context) => NotificationPage(),
 
         //'/gallery': (context) => const GalleryPage(), // Rute untuk gallery screen
         //'/trashbin': (context) => const TrashbinPage(), // Rute untuk trashbin screen

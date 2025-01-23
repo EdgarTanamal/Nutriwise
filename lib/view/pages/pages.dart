@@ -27,3 +27,4 @@ part 'history_daily_meal_page.dart';
 part 'camera_page.dart';
 part 'introScreen.dart';
 part 'surveyScreen.dart';
+part 'notification_page.dart';
