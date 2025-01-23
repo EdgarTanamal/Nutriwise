@@ -12,7 +12,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     homeViewModel = HomeViewModel();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await homeViewModel.fetchSurveyDetails(); // Tunggu sampai selesai
+      await homeViewModel.initializeHomepage();
+
       print("Total Calorie Goal: ${homeViewModel.totalCalorieGoal}");
     });
   }
@@ -22,15 +23,27 @@ class _HomeScreenState extends State<HomeScreen> {
     return ChangeNotifierProvider.value(
         value: homeViewModel,
         child: FutureBuilder(
-          future: homeViewModel.fetchSurveyDetails(),
+          future: homeViewModel.initializeHomepage(),
           builder: (context, snapshot) {
-            if (homeViewModel.isLoading) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // Tampilkan layar loading jika Future belum selesai
               return Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: Colors.white,
-                  child: Center(child: CircularProgressIndicator()));
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.white,
+                child: Center(child: CircularProgressIndicator()),
+              );
             }
+            if (snapshot.hasError) {
+              // Tangani jika ada error
+              return Scaffold(
+                body: Center(
+                  child: Text('Error: ${snapshot.error}'),
+                ),
+              );
+            }
+
+
             return Consumer<HomeViewModel>(
               builder: (context, homeViewModel, _) {
                 return WillPopScope(

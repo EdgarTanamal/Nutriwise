@@ -6,6 +6,7 @@ import 'package:diabets/repository/surveyRepository.dart';
 
 import '../data/network/firebaseAuthServices.dart';
 import '../model/user.dart';
+import '../repository/historyRepository.dart';
 import '../repository/userRepository.dart';
 import '../shared/shared.dart';
 

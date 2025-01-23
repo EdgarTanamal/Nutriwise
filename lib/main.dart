@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/history', // Tentukan rute awal sebagai splash screen
+      initialRoute: '/login', // Tentukan rute awal sebagai splash screen
       routes: {
         '/splash': (context) => const SplashScreen(), // Rute untuk splash screen
         '/home': (context) =>  HomeScreen(), // Rute untuk home screen
