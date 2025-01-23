@@ -28,3 +28,4 @@ part 'camera_page.dart';
 part 'introScreen.dart';
 part 'surveyScreen.dart';
 part 'notification_page.dart';
+part 'profile_page.dart';

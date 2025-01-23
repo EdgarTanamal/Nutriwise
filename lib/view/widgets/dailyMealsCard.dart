@@ -77,13 +77,21 @@ class dailyMealsCard extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => HistoryDailyMealPage()),
+                                    );
+                                  },
+                                  child: Image.asset(
                                     AppPicture.plusPicture,
-                                  fit: BoxFit.fill,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ),
-          
+
                           ],
                         ),
                         SizedBox(height: 20),

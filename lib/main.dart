@@ -3,10 +3,14 @@ import 'package:diabets/viewmodel/viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/network/firebaseService.dart';
+import 'package:camera/camera.dart';
+
+late List<CameraDescription> _cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseService.initializeFirebase();
+  _cameras = await availableCameras();
   runApp(
     ChangeNotifierProvider(
       create: (context) => LoginViewModel(),
@@ -39,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/introSurvey':(context) => IntroScreen(),
         '/survey':(context) => SurveyScreen(),
         '/notification' : (context) => NotificationPage(),
+        '/profile' : (context) => ProfilePage(),
 
         //'/gallery': (context) => const GalleryPage(), // Rute untuk gallery screen
         //'/trashbin': (context) => const TrashbinPage(), // Rute untuk trashbin screen

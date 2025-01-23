@@ -8,13 +8,7 @@ class ArticlePage extends StatelessWidget {
         title: const Text('Article'),  
         centerTitle: true,  
         backgroundColor: Colors.white,  
-        elevation: 0,  
-        leading: IconButton(  
-          icon: const Icon(Icons.arrow_back, color: Colors.black),  
-          onPressed: () {  
-            Navigator.pop(context);  
-          },  
-        ),  
+        elevation: 0,
       ),  
       body: Padding(  
         padding: const EdgeInsets.all(16.0),  
@@ -54,27 +48,7 @@ class ArticlePage extends StatelessWidget {
           ],  
         ),  
       ),  
-      bottomNavigationBar: BottomNavigationBar(  
-        items: const [  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.home),  
-            label: 'Home',  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.camera_alt),  
-            label: 'Camera',  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.article),  
-            label: 'Article',  
-          ),  
-        ],  
-        currentIndex: 2, // Set current index to Article  
-        selectedItemColor: Colors.green,  
-        onTap: (index) {  
-          // Handle navigation  
-        },  
-      ),  
+      bottomNavigationBar: Navbar(),
     );  
   }  
   
