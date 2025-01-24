@@ -112,7 +112,6 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 16),
                     ElevatedButton.icon(
                       onPressed: () {},
-                      icon: Icon(Icons.g_translate),
                       label: Text('Continue with Google'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,

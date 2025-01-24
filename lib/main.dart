@@ -1,22 +1,26 @@
+import 'package:camera/camera.dart';
+import 'package:diabets/view/pages/camera_page.dart';
 import 'package:diabets/view/pages/pages.dart';
 import 'package:diabets/viewmodel/viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/network/firebaseService.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
   await FirebaseService.initializeFirebase();
   runApp(
     ChangeNotifierProvider(
       create: (context) => LoginViewModel(),
-      child: MyApp()
+      child: MyApp(cameras: cameras),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final List<CameraDescription> cameras;
+  const MyApp({super.key, required this.cameras});
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +31,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/login', // Tentukan rute awal sebagai splash screen
+      initialRoute: '/splash', // Ensure this matches an existing route
       routes: {
-        '/splash': (context) => const SplashScreen(), // Rute untuk splash screen
-        '/home': (context) =>  HomeScreen(), // Rute untuk home screen
-        '/login': (context) => LoginPage(), // Rute untuk login screen
-        '/register': (context) => RegisterPage(), // Rute untuk register screen
-        '/article': (context) => ArticlePage(), // Rute untuk article
-        '/history': (context) => const HistoryDailyMealPage(), // Rute untuk history
-        '/camera': (context) => CameraPage(), // Rute untuk camera
-        '/introSurvey':(context) => IntroScreen(),
-        '/survey':(context) => SurveyScreen(),
-        '/notification' : (context) => NotificationPage(),
-
-        //'/gallery': (context) => const GalleryPage(), // Rute untuk gallery screen
-        //'/trashbin': (context) => const TrashbinPage(), // Rute untuk trashbin screen
+        '/splash': (context) => const SplashScreen(),
+        '/home': (context) => HomeScreen(),
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/article': (context) => ArticlePage(),
+        '/history': (context) => const HistoryDailyMealPage(),
+        '/camera': (context) => CameraPage(cameras: cameras),
+        '/introSurvey': (context) => IntroScreen(),
+        '/survey': (context) => SurveyScreen(),
+        '/notification': (context) => NotificationPage(),
       },
     );
   }

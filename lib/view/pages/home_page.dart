@@ -363,23 +363,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.start,
                                         children: [
                                           ArticleCard(
-                                            picture: "picture",
+                                            picture: "https://cdn1-production-images-kly.akamaized.net/UdGxQFOr-QQtc5wFZcl9mvZcfwM=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3390091/original/047746000_1614610130-Croatian_Salad.jpg",
                                             isArticle: false,
-                                            food: "FOOD",
-                                            calorie: 300,
+                                            food: "Salad",
+                                            calorie: 95,
                                           ),
                                           ArticleCard(
-                                            picture: "picture",
+                                            picture: "https://burgernj.com/wp-content/uploads/2021/05/Milkshakes-Smothie_result.jpg",
                                             isArticle: false,
-                                            food: "FOOD",
-                                            calorie: 300,
+                                            food: "Smoothie",
+                                            calorie: 36.8,
                                           ),
-                                          ArticleCard(
-                                            picture: "picture",
-                                            isArticle: false,
-                                            food: "FOOD",
-                                            calorie: 300,
-                                          )
                                         ],
                                       ),
                                     ),
@@ -414,22 +408,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           ArticleCard(
-                                              picture: "picture",
-                                              keywords: "keywords",
-                                              title: "title",
-                                              description: "description",
-                                              isArticle: true),
+                                              picture: "https://asset.kompas.com/crops/nP95wO9Z1PUhZojPylVBPkIGraM=/29x22:748x502/1200x800/data/photo/2024/08/15/66bdc41574ef3.jpg",
+                                              keywords: "health",
+                                              title: "Dokter: Konsumsi Gula Berlebih Tingkatkan Risiko Depresi",
+                                              description: "Mengonsumsi gula tinggi atau berlebih berhubungan dengan peningkatan risiko depresi atau gangguan mental lainnya. Ternyata sayangnya iya, gula terkait sekali dengan depresi. Kadang jadi orang menyebutkan karena saya depresi maka kita suka makan banyak minum",
+                                              isArticle: true,
+
+                                          ),
                                           ArticleCard(
-                                              picture: "picture",
-                                              keywords: "keywords",
-                                              title: "title",
-                                              description: "description",
-                                              isArticle: true),
-                                          ArticleCard(
-                                              picture: "picture",
-                                              keywords: "keywords",
-                                              title: "title",
-                                              description: "description",
+                                              picture: "https://asset.kompas.com/crops/xiPV-d1ESKCBkc-GNe2WvilTflw=/19x247:4502x3236/1200x800/data/photo/2021/12/19/61bead1d7f13f.jpg",
+                                              keywords: "sleep, health, diabetes",
+                                              title: "Sering Terbangun untuk Pipis Malam, Tanda Diabetes?",
+                                              description: "Jika kita sering terbangun di malam hari untuk buang air kecil, kita mungkin bertanya-tanya apakah ada masalah kesehatan yang mendasari. Kebanyakan orang saat tidur malam tidak ingin pipis lebih dari sekali dalam",
                                               isArticle: true),
                                         ],
                                       ),

@@ -8,19 +8,18 @@ class ArticleCard extends StatelessWidget {
   final bool isArticle;
   final String food;
   final double calorie;
-
+  final bool isFull;
 
   const ArticleCard({
     super.key,
     required this.picture,
     required this.isArticle,
-    this.keywords="",
-    this.title="",
-    this.description="",
-    this.food ="",
-    this.calorie=0,
-
-
+    this.keywords = "",
+    this.title = "",
+    this.description = "",
+    this.food = "",
+    this.calorie = 0,
+    this.isFull =false
   });
 
   @override
@@ -31,28 +30,30 @@ class ArticleCard extends StatelessWidget {
         IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            // Makes children stretch to the same height
             children: [
               Container(
                 width: 10,
                 decoration: BoxDecoration(
-                  color: isArticle?AppColors.red:AppColors.lightPurple,
+                  color: isArticle ? AppColors.red : AppColors.lightPurple,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)
-                  ),
+                      topLeft: Radius.circular(5)),
                 ),
               ),
               Column(
                 children: [
                   Container(
-                    width: 192,
+                    width: isFull?350:192,
                     height: 108,
                     color: AppColors.grey,
+                    child: Image.network(
+                      picture,
+                      fit: BoxFit.cover, // Menyesuaikan gambar dengan ukuran container
+                    ),
                   ),
                   Container(
-                    width: 187,
-                    height: isArticle?120:null,
+                    width: isFull?350:187,
+                    height: isArticle ? 120 : null,
                     color: AppColors.backgroundCard,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -61,32 +62,38 @@ class ArticleCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            isArticle?"Keywords: $keywords ":"Food: $food",
+                            isArticle ? "Keywords: $keywords" : "Food: $food",
                             style: GoogleFonts.archivo(
-                              color: isArticle?AppColors.subText:AppColors.textColor,
-                              fontSize: isArticle?10:18,
+                              color: isArticle ? AppColors.subText : AppColors.textColor,
+                              fontSize: isArticle ? 10 : 18,
                               fontWeight: FontWeight.w600,
                             ),
+                            overflow: TextOverflow.ellipsis, // Overflow handler
+                            maxLines: 1, // Limit to one line
                           ),
                           SizedBox(height: 8),
                           Text(
-                            isArticle?"$title":"Calorie: $calorie Kcal",
+                            isArticle ? "$title" : "Calorie: $calorie Kcal",
                             style: GoogleFonts.archivo(
-                              fontSize: isArticle?18:10,
-                              color: isArticle?AppColors.textColor:AppColors.subText,
+                              fontSize: isArticle ? 15 : 10,
+                              color: isArticle ? AppColors.textColor : AppColors.subText,
                               fontWeight: FontWeight.w600,
-
                             ),
+                            overflow: TextOverflow.ellipsis, // Overflow handler
+                            maxLines: 2, // Limit to 2 lines for title
                           ),
                           SizedBox(height: 8),
-                          isArticle?
-                          Text(
+                          isArticle
+                              ? Text(
                             "Description: $description",
                             style: GoogleFonts.archivo(
-                                fontSize: 10,
-                                color: AppColors.subText
+                              fontSize: 10,
+                              color: AppColors.subText,
                             ),
-                          ):SizedBox.shrink(),
+                            overflow: TextOverflow.ellipsis, // Overflow handler
+                            maxLines: 2, // Limit to 2 lines for description
+                          )
+                              : SizedBox.shrink(),
                         ],
                       ),
                     ),

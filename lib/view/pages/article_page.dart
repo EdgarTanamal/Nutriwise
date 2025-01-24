@@ -4,18 +4,7 @@ class ArticlePage extends StatelessWidget {
   @override  
   Widget build(BuildContext context) {  
     return Scaffold(  
-      appBar: AppBar(  
-        title: const Text('Article'),  
-        centerTitle: true,  
-        backgroundColor: Colors.white,  
-        elevation: 0,  
-        leading: IconButton(  
-          icon: const Icon(Icons.arrow_back, color: Colors.black),  
-          onPressed: () {  
-            Navigator.pop(context);  
-          },  
-        ),  
-      ),  
+      appBar: const Header(),
       body: Padding(  
         padding: const EdgeInsets.all(16.0),  
         child: Column(  
@@ -36,45 +25,32 @@ class ArticlePage extends StatelessWidget {
             // Article List  
             Expanded(  
               child: ListView(  
-                children: [  
-                  _buildArticleCard(  
-                    title: 'How to Diet?',  
-                    imageUrl: 'https://via.placeholder.com/150',  
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-                  ),  
-                  const SizedBox(height: 16),  
-                  _buildArticleCard(  
-                    title: 'How to Diet?',  
-                    imageUrl: 'https://via.placeholder.com/150',  
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-                  ),  
+                children: [
+                  ArticleCard(
+                    picture: "https://asset.kompas.com/crops/nP95wO9Z1PUhZojPylVBPkIGraM=/29x22:748x502/1200x800/data/photo/2024/08/15/66bdc41574ef3.jpg",
+                    keywords: "health",
+                    title: "Dokter: Konsumsi Gula Berlebih Tingkatkan Risiko Depresi",
+                    description: "Mengonsumsi gula tinggi atau berlebih berhubungan dengan peningkatan risiko depresi atau gangguan mental lainnya. Ternyata sayangnya iya, gula terkait sekali dengan depresi. Kadang jadi orang menyebutkan karena saya depresi maka kita suka makan banyak minum",
+                    isArticle: true,
+                    isFull: true,
+                  ),
+                  SizedBox(height: 16),
+                  ArticleCard(
+                      picture: "https://asset.kompas.com/crops/xiPV-d1ESKCBkc-GNe2WvilTflw=/19x247:4502x3236/1200x800/data/photo/2021/12/19/61bead1d7f13f.jpg",
+                      keywords: "sleep, health, diabetes",
+                      title: "Sering Terbangun untuk Pipis Malam, Tanda Diabetes?",
+                      description: "Jika kita sering terbangun di malam hari untuk buang air kecil, kita mungkin bertanya-tanya apakah ada masalah kesehatan yang mendasari. Kebanyakan orang saat tidur malam tidak ingin pipis lebih dari sekali dalam",
+                      isArticle: true,
+                    isFull: true,
+
+                  ),
                 ],  
               ),  
             ),  
           ],  
         ),  
       ),  
-      bottomNavigationBar: BottomNavigationBar(  
-        items: const [  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.home),  
-            label: 'Home',  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.camera_alt),  
-            label: 'Camera',  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.article),  
-            label: 'Article',  
-          ),  
-        ],  
-        currentIndex: 2, // Set current index to Article  
-        selectedItemColor: Colors.green,  
-        onTap: (index) {  
-          // Handle navigation  
-        },  
-      ),  
+      bottomNavigationBar: Navbar(),
     );  
   }  
   
